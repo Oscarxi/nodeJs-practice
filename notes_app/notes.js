@@ -2,7 +2,7 @@ import fs from 'fs';
 import chalk from 'chalk';
 
 // Add a new note, including title and content
-export function addNote(title, content) {
+function addNote(title, content) {
     if (!title || !content) {
         console.log(chalk.bgRed('Title and Content not provided :('));
     } else {
@@ -23,7 +23,7 @@ export function addNote(title, content) {
 };
 
 // Remove the note according to the title
-export function removeNote(title) {
+function removeNote(title) {
     if (!title) {
         console.log(chalk.bgRed('Title not provided :('));
     } else {
@@ -40,7 +40,7 @@ export function removeNote(title) {
 };
 
 // List all notes
-export function listNotes() {
+function listNotes() {
     const notes = loadNotes();
 
     console.log(chalk.bgGray('Your notes:'));
@@ -51,7 +51,7 @@ export function listNotes() {
 };
 
 // Read the note according to the title
-export function readNote(title) {
+function readNote(title) {
     if (!title) {
         console.log(chalk.bgRed('Title not provided :('));
     } else {
@@ -83,3 +83,5 @@ function saveNotes(notes) {
     const dataJSON = JSON.stringify(notes);
     fs.writeFileSync('notes.json', dataJSON);
 };
+
+export { addNote, removeNote, listNotes, readNote };
