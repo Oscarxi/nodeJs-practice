@@ -4,15 +4,11 @@ const getAccessKey = () => {
     return '3d20b8e0d78fae05458355d00c6163f3';
 }
 
-const getUrl = (access_key, city) => {
-    const url = `http://api.weatherstack.com/current?access_key=${access_key}&query=${city}`
-    return url;
+const getUrl = (city, access_key) => {
+        return `http://api.weatherstack.com/current?access_key=${access_key}&query=${city}`;
 }
 
-const getWeather = (city, callback) => {
-    const access_key = getAccessKey();
-    const url = getUrl(access_key, city);
-
+const getWeatherJson = (url, callback) => {
     request({ url: url }, (error, response) => {
         if (error) {
             callback('Unable to connect to weather service :(');
@@ -20,19 +16,32 @@ const getWeather = (city, callback) => {
             callback('Unable to find location :(');
         } else {
             const data = JSON.parse(response.body);
-            const currentWeather = data.current;
-
-            const descriptions = currentWeather.weather_descriptions;
-            const degree = currentWeather.temperature;
-            const precip = currentWeather.precip;
-            const weather = descriptions + '\ndegree: ' + degree + '\nchance of rain: ' + precip + '%\n';
-
-            callback(city + ':\n' + weather);
+            callback(data);
         }
     });
 }
 
-const city = 'Taipei';
-getWeather(city, (weather) => {
-    console.log(weather);
-});
+const getCurrentWeather = (weatherJson) => {
+    const currentWeather = weatherJson.current;
+
+    const descriptions = currentWeather.weather_descriptions;
+    const degree = currentWeather.temperature;
+    const precip = currentWeather.precip;
+    const weather_message = descriptions + '\ndegree: ' + degree + '\nchance of rain: ' + precip + '%\n';
+
+    return weather_message;
+}
+
+// main
+const city = process.argv[2];
+if (!city) {
+    console.log('Please provide a city!');
+} else {
+    const access_key = getAccessKey();
+    const url = getUrl(city, access_key);
+
+    getWeatherJson(url, (weatherJson) => {
+        const weather_message = getCurrentWeather(weatherJson);
+        console.log(weather_message);
+    });
+}
