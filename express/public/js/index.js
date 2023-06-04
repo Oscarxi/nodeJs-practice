@@ -26,7 +26,7 @@ weatherForm.addEventListener('submit', (e) => {
                 }
 
                 description.textContent = `weather: ${weatherInformation.description}`;
-                temperature.textContent = `temperature: ${weatherInformation.temperature}`;
+                temperature.textContent = `degree: ${weatherInformation.degree}`;
                 precipitation.textContent = `precipitation: ${weatherInformation.precipitation}`;
                 weatherIcon.src = weatherInformation.weatherIcon;
             });
