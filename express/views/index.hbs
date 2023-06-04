@@ -6,15 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Weather</title>
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/index.js"></script>
 </head>
 <body>
     <div class="main-content">
         {{>header}}
 
-        <p>Use this site to get your weather!</p>
+        <p class="welcome-text">Weather helper in your area</p>
+
+        <form class="location-submission">
+            <input id="location-value" type="text" placeholder="Location">
+            <button>Search</button>
+        </form>
+    <p></p>
+    <div>
+        <img id="weatherIcon" src=""></img>
+        <p id="description"></p>
+        <p id="temperature"></p>
+        <p id="precipitation"></p>
     </div>
 
+    </div>
+
+
     {{>footer}}
+
+    <script src="./js/index.js"></script>
 </body>
 </html>

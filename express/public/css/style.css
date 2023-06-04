@@ -37,6 +37,24 @@ header a {
     text-decoration: none;
 }
 
+.welcome-text {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
 .portrait {
     width: 250px;
+}
+
+input {
+    border: 1px solid #cccccc;
+    padding: 8px;
+}
+
+button {
+    background-color: darkolivegreen;
+    color: #eae8e8;
+    border: 1px solid #888888;
+    padding: 8px;
+    cursor: pointer;
 }

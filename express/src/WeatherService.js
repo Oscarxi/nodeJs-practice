@@ -26,22 +26,25 @@ const getCurrentWeather = (weatherJson) => {
 
     const descriptions = currentWeather.weather_descriptions;
     const degree = currentWeather.temperature;
-    const precip = currentWeather.precip;
-    const weatherMessage = {
-        'descriptions': descriptions,
+    const precipitation = currentWeather.precip;
+    const weatherIcon = currentWeather.weather_icons;
+    const weatherInformation = {
+        'description': descriptions[0],
         'degree': degree,
-        'precip': precip,
+        'precipitation': precipitation,
+        'weatherIcon': weatherIcon[0]
     }
 
-    return weatherMessage;
+    return weatherInformation;
 }
 
 async function forecast(location) {
     try {
       const url = getUrl(location);
       const weatherJson = await getWeatherJson(url);
-      const weatherMessage = getCurrentWeather(weatherJson);
-      return weatherMessage;
+      const weatherInformation = getCurrentWeather(weatherJson);
+
+      return weatherInformation;
     } catch (error) {
       return 'Unable to get weather information';
     }

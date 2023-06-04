@@ -28,15 +28,15 @@ app.get('/about', (req, res) => {
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
         return res.send({
-            errorMessage: 'You must provide an address',
+            error: 'You must provide an address',
         });
     }
 
     forecast(req.query.address)
-        .then(weather => {
+        .then(weatherInformation => {
             return res.send({
                 location: req.query.address,
-                weather: weather,
+                weatherInformation: weatherInformation
             });
         })
 });
